@@ -3,10 +3,10 @@ import { createMethod, findMethodAll, findMethodById, updateMethod, deleteMethod
 import middleware from "../../middleware/auth"
 const router = express.Router();
 
-router.post("/", createMethod)
+router.post("/", [middleware, createMethod])
 router.get("/", [middleware, findMethodAll])
-router.get("/:id", findMethodById)
-router.put("/:id", updateMethod)
-router.delete("/", deleteMethod)
+router.get("/:id", [middleware, findMethodById])
+router.put("/:id", [middleware, updateMethod])
+router.delete("/", [middleware, deleteMethod])
 
 export default router
