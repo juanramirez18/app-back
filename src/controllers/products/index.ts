@@ -20,11 +20,11 @@ const createMethod =async (req: Request, res: Response):Promise<void> => {
 const updateMethod =async (req: Request, res: Response):Promise<void> => {
     const {id} = req.params
     try {
-        const  product = await prisma.user.update({
+        const  product = await prisma.products.update({
             where:{id:id},
             data: req.body
         })
-        res.json( product), console.log("Producto actualizado existosamente",  product)
+        res.json( {messagge:" update product succes"}), console.log("Producto actualizado existosamente",  product)
     } catch (error) {
         res.status(500).json(error), console.log(error)
         
@@ -52,7 +52,7 @@ const findMethodById =async (req: Request, res: Response) => {
             where: {id:id}
         })
         console.log(product)
-        res.json(product)
+        res.status(200)
     } catch (error) {
         res.status(500).json(error), console.log(error)
         
@@ -61,16 +61,16 @@ const findMethodById =async (req: Request, res: Response) => {
 };
 const deleteMethod =async (req: Request, res: Response) => {
     console.log(typeof(req.body.id))
-    const {id} = req.body
+    const {id} = req.params
     console.log(id)
     try {
         const product = await prisma.products.delete({
             where: {id:id}
         })
         console.log("Producto eliminado exitosamente", product)
-        res.json(product)
+        return res.status(200).json({messagge:"Usuario eliminado exitosamente"})
     } catch (error) {
-        res.status(500).json(error), console.log(error)
+        return res.status(500).json(error), console.log(error)
         
     }
     

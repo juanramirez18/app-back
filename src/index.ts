@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import router from "./routes";
 import { PrismaClient } from '@prisma/client'
+import cors from "cors"
 
 const prisma = new PrismaClient();
 
@@ -11,8 +12,11 @@ mongoose.connect(connStr).then(()=>console.log("se ha conectado exitosamente a l
 const app = express();
 const port = 3000
 app.use(express.json());
+app.use(cors({origin: "*", credentials: false}))
 
 app.use("/api", router)
+
+
 app.listen(port, ()=> {
   console.log("Ejecutandose en el puerto 3000")
 })

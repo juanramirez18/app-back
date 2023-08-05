@@ -7,6 +7,6 @@ router.post("/", createMethod)
 router.get("/", findMethodAll)
 router.get("/:id", findMethodById)
 router.put("/:id", updateMethod)
-router.delete("/", deleteMethod)
+router.delete("/:id", deleteMethod)
 
 export default router
